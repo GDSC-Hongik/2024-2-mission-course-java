@@ -1,9 +1,29 @@
 package com.gdsc.game;
 
-public class Application {
+
+import java.util.Scanner;
+
+public class Application{
 
     public static void main(String[] args) {
-        System.out.println("hello world");
+        System.out.println("두 캐릭터 이름을 입력해주세요.");
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        String[] names = input.split(",");
+        String name1 = names[0];
+        String name2 = names[1];
+
+        Character A = new Character(name1);
+        Character B = new Character(name2);
+
+        System.out.println("How many turns?");
+        int turn = sc.nextInt();
+
+        game runGame = new game(A,B,turn);
+        runGame.runGame();
+
     }
 
 }
