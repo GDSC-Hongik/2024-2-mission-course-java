@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 interface Turn{
     void inTurn(int choiceA, int choiceB); //턴 내부 상황
-    int turnUp(); //턴 증가
 
 }
 
@@ -26,17 +25,9 @@ public class game implements Turn{
 
     }
 
-    @Override
-    public int turnUp(){
-        if (turn==end){ //turn 횟수 소진
-            return 0;
-        }
-        return 1; //계속 게임 진행
-    }
 
     public void runGame(){
-        turn = 0;
-        for(int i = 0; A.alive()&&B.alive()&&turn<end;i++){
+        for(int turn=0; A.alive()&&B.alive()&&turn<end;turn++){
             print(A,B);
             Scanner sc1 = new Scanner(System.in);
             int choiceA = sc1.nextInt();

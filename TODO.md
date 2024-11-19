@@ -16,5 +16,4 @@ turn(turn)
   4. attack three times
   5. hit strongly
 - turn 기능 목록
-  1. turn up
-  2. block turn
+  1. inTurn 
