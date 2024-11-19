@@ -67,8 +67,18 @@ public class game implements Turn{
             Scanner sc2 = new Scanner(System.in);
             int choiceB =sc2.nextInt();
             inTurn(choiceA,choiceB);
-
         }
+
+        //for문 끝났을 경우 -> turn 횟수 소진 & 한 명 죽음
+        if(A.getHp()<B.getHp()){
+            System.out.println(B.getName()+" win");
+        } else if (A.getHp()>B.getHp()) {
+            System.out.println(A.getName()+" win");
+        } else{
+            System.out.println("draw");
+        }
+
+
     }
 
     public void print(Character A, Character B){
