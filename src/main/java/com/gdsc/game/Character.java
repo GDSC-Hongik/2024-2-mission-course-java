@@ -12,6 +12,12 @@ public class Character implements interfaceCharacter{
     private int hp;
     private int mp;
 
+    public Character(String name){
+        this.name = name;
+        this.hp = 100;
+        this.mp = 100;
+    }
+
     @Override
     public void setName(String name){
         this.name = name;
