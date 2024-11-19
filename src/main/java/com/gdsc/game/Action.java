@@ -1,46 +1,46 @@
 package com.gdsc.game;
 
 interface interfaceAction{
-    Object[] attack();
-    Object[] defense();
-    void attack2();
-    void attack3();
-    void attackHard();
+    int attack();
+    int defense();
+    int attack2();
+    int attack3();
+    int attackHard();
 }
 
 public class Action implements interfaceAction {
 
-    String action;
-
     @Override
-    public Object[] attack(){
-        action = "attack";
+    public int attack(){
         int damage = (int)(Math.random() * 10) + 1;
-        Object[] values = {action,damage};
-        return values;
+        return damage;
     }
 
     @Override
-    public Object[] defense(){
-        action = "defense";
+    public int defense(){
         int shield = (int)(Math.random() * 10) + 1;
-        Object[] values = {action, shield};
-        return values;
+        return shield;
 
     }
 
     @Override
-    public void attack2(){
+    public int attack2(){
+        int damage = (int)(Math.random() * 19) + 2;
+        return damage;
 
     }
 
     @Override
-    public void attack3(){
+    public int attack3(){
+        int damage = (int)(Math.random() * 28) + 3;
+        return damage;
 
     }
 
     @Override
-    public void attackHard(){
+    public int attackHard(){
+        int damage = (int)(Math.random() * 46) + 5;
+        return damage;
 
     }
 }
