@@ -1,15 +1,21 @@
 package com.gdsc.game;
 
-interface Character{
+interface interfaceCharacter{
 
+    void setName(String name);
     void losehp(int digit);
     void losemp(int digit);
 }
 
-public class realCharacter implements Character {
+public class Character implements interfaceCharacter{
     String name;
-    int hp;
-    int mp;
+    private int hp;
+    private int mp;
+
+    @Override
+    public void setName(String name){
+        this.name = name;
+    }
 
     @Override
     public void losehp(int digit){
@@ -20,4 +26,5 @@ public class realCharacter implements Character {
     public void losemp(int digit) {
         this.mp -= digit;
     }
+
 }
