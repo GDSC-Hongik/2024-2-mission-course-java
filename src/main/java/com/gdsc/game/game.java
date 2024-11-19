@@ -22,9 +22,6 @@ public class game implements Turn{
 
     Action action = new Action();
 
-    private int[] actionList = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
-
-
 
     public game(Character A, Character B, int turn){ //매개변수 turn은 총 횟수
         this.A = A;
@@ -37,22 +34,28 @@ public class game implements Turn{
         Action a = new Action();
         Action b = new Action();
 
+
+
         if(choiceA==2||choiceB==2){
             if(choiceA==2&&choiceB==2) {return;} //둘다 방어일 경우 turn 넘김
             else if (choiceA==2){ //A가 방어인 경우
+                int[] actionList = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
                 int damage = max(0,actionList[choiceB]-actionList[1]); //damage는 음수일 수 없음
                 A.losehp(damage);
             }
             else{ //B가 방어인 경우
+                int[] actionList = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
                 int damage = max(0,actionList[choiceA]-actionList[1]);
                 B.losehp(damage);
             }
         }
         else{//둘다 공격인 경우
-            int damageA = actionList[choiceA]; //A가 먼저 공격
+            int[] actionListA = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
+            int damageA = actionListA[choiceA]; //A가 먼저 공격
             B.losehp(damageA);
             if(B.getHp()<=0) return; // B죽음
-            int damageB = actionList[choiceB];
+            int[] actionListB = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
+            int damageB = actionListB[choiceB];
             A.losehp(damageB);
         }
     }
