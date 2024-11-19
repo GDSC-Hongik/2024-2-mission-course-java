@@ -34,28 +34,26 @@ public class game implements Turn{
         Action a = new Action();
         Action b = new Action();
 
-
-
         if(choiceA==2||choiceB==2){
             if(choiceA==2&&choiceB==2) {return;} //둘다 방어일 경우 turn 넘김
             else if (choiceA==2){ //A가 방어인 경우
                 int[] actionList = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
-                int damage = max(0,actionList[choiceB]-actionList[1]); //damage는 음수일 수 없음
+                int damage = max(0,actionList[choiceB-1]-actionList[1]); //damage는 음수일 수 없음
                 A.losehp(damage);
             }
             else{ //B가 방어인 경우
                 int[] actionList = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
-                int damage = max(0,actionList[choiceA]-actionList[1]);
+                int damage = max(0,actionList[choiceA-1]-actionList[1]);
                 B.losehp(damage);
             }
         }
         else{//둘다 공격인 경우
             int[] actionListA = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
-            int damageA = actionListA[choiceA]; //A가 먼저 공격
+            int damageA = actionListA[choiceA-1]; //A가 먼저 공격
             B.losehp(damageA);
             if(B.getHp()<=0) return; // B죽음
             int[] actionListB = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
-            int damageB = actionListB[choiceB];
+            int damageB = actionListB[choiceB-1];
             A.losehp(damageB);
         }
     }
@@ -64,11 +62,10 @@ public class game implements Turn{
     public void runGame(){
         for(int turn=0; A.alive()&&B.alive()&&turn<end;turn++){
             print(A,B);
-            Scanner sc1 = new Scanner(System.in);
-            int choiceA = sc1.nextInt();
+            Scanner sc = new Scanner(System.in);
+            int choiceA = sc.nextInt();
             print(B,A);
-            Scanner sc2 = new Scanner(System.in);
-            int choiceB =sc2.nextInt();
+            int choiceB =sc.nextInt();
             inTurn(choiceA,choiceB);
         }
 
