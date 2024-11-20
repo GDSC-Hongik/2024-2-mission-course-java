@@ -37,21 +37,26 @@ public class game implements Turn{
         if(choiceA==2||choiceB==2){
             if(choiceA==2&&choiceB==2) {return;} //둘다 방어일 경우 turn 넘김
             else if (choiceA==2){ //A가 방어인 경우
+                if(isSkill(B,choiceB)==0) return;
                 int[] actionList = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
                 int damage = max(0,actionList[choiceB-1]-actionList[1]); //damage는 음수일 수 없음
                 A.losehp(damage);
             }
             else{ //B가 방어인 경우
+                if(isSkill(A,choiceA)==0) return;
                 int[] actionList = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
                 int damage = max(0,actionList[choiceA-1]-actionList[1]);
                 B.losehp(damage);
             }
         }
         else{//둘다 공격인 경우
-            int[] actionListA = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
+            if(isSkill(A,choiceA)==0) return; //마나 없음
+            else{int[] actionListA = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
             int damageA = actionListA[choiceA-1]; //A가 먼저 공격
             B.losehp(damageA);
+            }
             if(B.getHp()<=0) return; // B죽음
+            if(isSkill(B,choiceB)==0) return; //마나 없음
             int[] actionListB = {action.attack(),action.defense(),action.attack2(),action.attack3(),action.attackHard()};
             int damageB = actionListB[choiceB-1];
             A.losehp(damageB);
@@ -88,5 +93,37 @@ public class game implements Turn{
         System.out.println("3. double attack(2~20) - 2MP - 0turn");
         System.out.println("4. triple attack(3~30) - 3MP - 0turn");
         System.out.println("5. hard attack(5~50) - 5MP - 2turns");
+    }
+
+    public int isSkill(Character A, int choice){
+        int tempMp = A.getMp();
+        if(choice==3){
+            if(tempMp<2) {//마나가 없는 경우
+                return 0;
+            }
+            else{
+                A.losemp(2);
+                return 3; //리스트 인덱스
+            }
+        }
+        else if(choice==4){
+            if(tempMp<3) {//마나가 없는 경우
+                return 0;
+            }
+            else{
+                A.losemp(3);
+                return 4; //리스트 인덱스
+            }
+        }else if(choice==5){
+            if(tempMp<5) {//마나가 없는 경우
+                return 0;
+            }
+            else{
+                A.losemp(5);
+                return 5; //리스트 인덱스
+            }
+        }else{ //1 or 2
+            return choice;
+        }
     }
 }
