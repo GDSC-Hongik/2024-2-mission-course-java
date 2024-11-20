@@ -65,12 +65,22 @@ public class game implements Turn{
 
 
     public void runGame(){
-        for(int turn=0; A.alive()&&B.alive()&&turn<end;turn++){
-            print(A,B);
+        for(turn=0; A.alive()&&B.alive()&&turn<end;turn++){
             Scanner sc = new Scanner(System.in);
-            int choiceA = sc.nextInt();
-            print(B,A);
-            int choiceB =sc.nextInt();
+            int choiceA=2; //매개변수 2는 defense임으로 임시 초기화
+            int choiceB=2;
+            if(A.getWait()==0){
+                print(A,B);
+                choiceA = sc.nextInt();
+            }else{
+                A.setWait(A.getWait()-1);
+            }
+
+            if(B.getWait()==0){
+                print(B,A);
+                choiceB =sc.nextInt();
+            }
+
             inTurn(choiceA,choiceB);
         }
 
@@ -112,15 +122,16 @@ public class game implements Turn{
             }
             else{
                 A.losemp(3);
-                return 4; //리스트 인덱스
+                return 4;
             }
         }else if(choice==5){
             if(tempMp<5) {//마나가 없는 경우
                 return 0;
             }
             else{
+                A.setWait(2);
                 A.losemp(5);
-                return 5; //리스트 인덱스
+                return 5;
             }
         }else{ //1 or 2
             return choice;

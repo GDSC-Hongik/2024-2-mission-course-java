@@ -13,10 +13,20 @@ public class Character implements interfaceCharacter{
     private int hp;
     private int mp;
 
+    private int wait; //turn wait
+
+    public int getWait() {
+        return wait;
+    }
+
+    public void setWait(int wait) {
+        this.wait = wait;
+    }
+
     public Character(String name){
         this.name = name;
-        this.hp = 100;
-        this.mp = 10;
+        this.hp = 50;
+        this.mp = 7;
     }
 
     public int getHp() {

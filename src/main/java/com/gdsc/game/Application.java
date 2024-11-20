@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Application{
 
     public static void main(String[] args) {
-        System.out.println("두 캐릭터 이름을 입력해주세요.");
+        System.out.println("write two character");
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
