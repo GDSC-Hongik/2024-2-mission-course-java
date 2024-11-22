@@ -26,7 +26,7 @@ public class Character implements interfaceCharacter{
     public Character(String name){
         this.name = name;
         this.hp = 50;
-        this.mp = 7;
+        this.mp = 10;
     }
 
     public int getHp() {

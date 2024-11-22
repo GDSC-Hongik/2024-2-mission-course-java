@@ -39,8 +39,9 @@ public class game implements Turn {
                 return;
             } //둘다 방어일 경우 turn 넘김
             else if (choiceA == 2) { //A가 방어인 경우
+                //코드를 함수화할 수 있을 것 같지만,,,, 난 바쁘다,,
                 if (isSkill(B, choiceB) == 0) return;
-                int[] actionList = {action.attack(), action.defense(), action.attack2(), action.attack3(), action.attackHard()};
+                int[] actionList = {action.attack(), action.defense(), action.attack2(), action.attack3(), action.attackHard()}; //그때그때 랜덤값 생성을 위함
                 int damage = max(0, actionList[choiceB - 1] - actionList[1]); //damage는 음수일 수 없음
                 A.losehp(damage);
             } else { //B가 방어인 경우
@@ -63,7 +64,7 @@ public class game implements Turn {
             A.losehp(damageB);
         }
     }
-
+    
     public void runGame() {
         for (turn = 0; A.alive() && B.alive() && turn < end; turn++) {
             Scanner sc = new Scanner(System.in);
