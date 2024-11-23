@@ -13,4 +13,11 @@ public class Attack implements Behavior{
         opponentChar.setHp(opponentChar.getHp() - damage);
         System.out.printf("%s가 %s를 공격하여 %d의 데미지를 입혔습니다.%n", myChar.getName(), opponentChar.getName(), damage);
     }
+
+    @Override
+    public String getDescription() {
+        return "공격(1 ~ 10)";
+    }
+
+
 }

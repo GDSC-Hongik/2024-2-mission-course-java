@@ -13,6 +13,9 @@ public class Defend implements Behavior {
         MyChar.setDefense(range); // 방어값 설정
         System.out.printf("%s가 방어 태세를 취합니다! (%d 데미지 감소)%n", MyChar.getName(), range);
     }
-
+    @Override
+    public String getDescription() {
+        return "방어(1 ~ 10)";
+    }
 
 }
