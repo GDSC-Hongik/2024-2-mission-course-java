@@ -32,15 +32,15 @@ public class Skill implements Behavior{
             int damage = randomNum.nextInt(maxDamage - minDamage + 1) + minDamage;
             opponentChar.setHp(opponentChar.getHp() - damage);
 
-            // 쿨타임 설정
+            // 기다려야 하는 턴
             myChar.setTurnsUntilSkillReady(cooldown);
 
-            System.out.printf("%s가 %s를 사용하여 %d 데미지를 입혔습니다! (마나: %d 소모, %d턴 후 재사용)%n",
+            System.out.printf("%s가 %s를 사용하여 %d 데미지를 입혔습니다. (마나: %d 소모, %d턴 후 재사용)%n",
                     myChar.getName(), skillName, damage, manaCost, cooldown);
         } else if (myChar.getMp() < manaCost) {
-            System.out.println("마나가 부족하여 " + skillName + "을 사용할 수 없습니다!");
+            System.out.println("마나가 부족하여 " + skillName + "을 사용할 수 없습니다.");
         } else {
-            System.out.println(skillName + "은(는) 쿨타임 중입니다!");
+            System.out.println(skillName + "은(는) 기다린 후 사용 가능합니다.");
         }
     }
 }
