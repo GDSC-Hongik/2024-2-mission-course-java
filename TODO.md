@@ -7,11 +7,12 @@
   - int hp : 캐릭터 체력
   - int mp : 캐릭터 마나
   - int defense : 캐릭터 방어값
+  - List<Behavior> behaviors : 개별 캐릭터가 선택한 행동들을 리스트 형태로 저장
 
 - 메서드
   - boolean isAlive() : hp <= 0 이면 false 반환 (게임 종료)
 
-2. Behavior 인터페이스 
+2. Behavior 인터페이스 : 모든 행동(공격, 방어, 스킬)에 대한 공통 인터페이스
 - 메서드
   - void execute(Character MyChar, Character OpponentChar) :  행동을 수행한다.
 
@@ -26,3 +27,10 @@
     - 각 턴마다 사용자가 행동을 선택하도록 한다.
     - 매 턴마다 업데이트 된 상태를 출력한다.
     - 게임 종료 시, 멘트를 출력한다.
+
+
+<hr />
+추가적으로, 1 ~ 10 사이의 랜덤한 숫자를 생성하는 로직이 여러 클래스에서 반복되어 나타나므로 별도의 유틸리티 함수로 관리하고자 한다.
+
+
+
