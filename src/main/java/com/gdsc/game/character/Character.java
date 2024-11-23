@@ -11,6 +11,7 @@ public class Character {
     int mp;
     int defense;
     List<Behavior> behaviorList;
+    private int turnsUntilSkillReady;
 
     // constructor
     public Character(String name, int hp, int mp) {
@@ -19,14 +20,12 @@ public class Character {
         this.mp = mp;
         this.defense = 0;
         this.behaviorList = new ArrayList<>();
+        this.turnsUntilSkillReady = 0;
     }
 
+    // getter & setter
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getHp() {
@@ -45,10 +44,6 @@ public class Character {
         this.mp = mp;
     }
 
-    public int getDefense() {
-        return defense;
-    }
-
     public void setDefense(int defense) {
         this.defense = defense;
     }
@@ -61,8 +56,27 @@ public class Character {
         this.behaviorList = behaviorList;
     }
 
+    public int getTurnsUntilSkillReady() {
+        return turnsUntilSkillReady;
+    }
+
+    public void setTurnsUntilSkillReady(int turnsUntilSkillReady) {
+        this.turnsUntilSkillReady = turnsUntilSkillReady;
+    }
+
+    // method: skill 사용 여부를 관리
+    public void decreaseTurnsUntilSkillReady() {
+        if (turnsUntilSkillReady > 0) {
+            turnsUntilSkillReady--;
+        }
+    }
+
+    public boolean canUseSkill() {
+        return turnsUntilSkillReady == 0;
+    }
+
     // method: hp <= 0 이면 false 반환 (게임 종료)
-    boolean isAlive() {
+    public boolean isAlive() {
         return this.hp > 0;
     }
 
