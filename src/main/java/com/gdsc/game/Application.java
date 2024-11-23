@@ -1,9 +1,11 @@
 package com.gdsc.game;
 
+import com.gdsc.game.game.Game;
+
 public class Application {
 
     public static void main(String[] args) {
-        System.out.println("hello world");
+        Game.main(new String[]{});
     }
 
 }
