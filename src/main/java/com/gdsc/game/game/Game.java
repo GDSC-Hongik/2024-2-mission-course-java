@@ -23,7 +23,7 @@ public class Game {
         // skill 생성하기
         Skill slashTwo = new Skill("두번베기", 2, 20, 2, 0);
         Skill slashThree = new Skill("3번베기", 3, 30, 3, 0);
-        Skill punch = new Skill("쎼게 때리기", 0, 5, 5, 2);
+        Skill punch = new Skill("쎄게 때리기", 0, 5, 5, 2);
 
         System.out.println("몇 턴 동안 진행하시겠습니까?");
         int inputTurns = sc.nextInt();
