@@ -37,9 +37,20 @@ public class Game {
                     character1.getName(), character1.getHp(), character1.getMp(),
                     character2.getName(), character2.getHp(), character2.getMp());
 
-            // 추가 ??? ............
-            System.out.println("행동을 선택하세요:");
+            
+            System.out.println("행동을 선택하세요: ");
+            System.out.println("1. 공격(1 ~ 10)\n" +
+                    "2. 방어(1 ~ 10)\n" +
+                    "3. 두번베기(2 ~ 20) - 2MP - 0턴\n" +
+                    "4. 3번베기(3 ~ 30) - 3MP - 0턴\n" +
+                    "5. 쎼게 때리기(0 ~ 5) - 5MP - 2턴");
+
             for (int i = 0; i < character1.getBehaviorList().size(); i++) {
+                System.out.println("1. 공격(1 ~ 10)\n" +
+                        "2. 방어(1 ~ 10)\n" +
+                        "3. 두번베기(2 ~ 20) - 2MP - 0턴\n" +
+                        "4. 3번베기(3 ~ 30) - 3MP - 0턴\n" +
+                        "5. 쎼게 때리기(0 ~ 5) - 5MP - 2턴");
                 System.out.printf("%d. %s%n", i + 1, character1.getBehaviorList().get(i).getDescription());
             }
 
