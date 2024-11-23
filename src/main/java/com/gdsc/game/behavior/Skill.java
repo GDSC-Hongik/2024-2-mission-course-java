@@ -13,6 +13,7 @@ public class Skill implements Behavior{
     private int maxDamage;
     private int manaCost;
     private int cooldown;
+    private int remainingCooldown;
 
     public Skill(String skillName, int minDamage, int maxDamage, int manaCost, int cooldown) {
         this.skillName = skillName;
@@ -20,6 +21,8 @@ public class Skill implements Behavior{
         this.maxDamage = maxDamage;
         this.manaCost = manaCost;
         this.cooldown = cooldown;
+        this.remainingCooldown = 0;
+
     }
 
     @Override
@@ -42,5 +45,14 @@ public class Skill implements Behavior{
         } else {
             System.out.println(skillName + "은(는) 기다린 후 사용 가능합니다.");
         }
+    }
+
+    @Override
+    public String getDescription() {
+        return String.format("%s(%d ~ %d) - %dMP - %d턴", skillName, manaCost, manaCost * 10, manaCost);
+    }
+
+    public void reduceCooldown() {
+        if (remainingCooldown > 0) remainingCooldown--;
     }
 }
