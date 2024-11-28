@@ -24,6 +24,8 @@ public class Application{
         game runGame = new game(A,B,turn);
         runGame.runGame();
 
+        sc.close();
+
     }
 
 }

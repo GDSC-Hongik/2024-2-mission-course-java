@@ -7,13 +7,7 @@ import java.util.function.Supplier;
 
 import static java.lang.Math.max;
 
-
-interface Turn{
-    void inTurn(int choiceA, int choiceB); //턴 내부 상황
-
-}
-
-public class game implements Turn {
+public class game  {
     private int turn; //현재 turn
     private int end; // 총 turn 횟수
 
@@ -29,62 +23,50 @@ public class game implements Turn {
         this.end = turn;
     }
 
-    @Override
-    public void inTurn(int choiceA, int choiceB) {
-        Action a = new Action();
-        Action b = new Action();
-
-        if (choiceA == 2 || choiceB == 2) { //둘 중 하나는 방어, 하나는 공격
-            if (choiceA == 2 && choiceB == 2) {
+    public void act(Character A,Character B, int choice){ //행위자는 A (A가 공격 or A shield 생성)
+        A.setShield(0); //shield를 초기화 (이미 썼거나 처음인 경우)
+        int[] actionList = {action.attack(), action.defense(), action.attack2(A), action.attack3(A), action.attackHard(A)}; //인덱스 0~4
+        if (choice ==2){
+            int shield = actionList[choice-1];
+            A.setShield(shield);
+        } else { //choice == 1 or 3 or 4 or 5
+            if(A.getMp()<mana(choice) ){ //마나없는 경우
+                System.out.println("no have mp!");
                 return;
-            } //둘다 방어일 경우 turn 넘김
-            else if (choiceA == 2) { //A가 방어인 경우
-                //코드를 함수화할 수 있을 것 같지만,,,, 난 바쁘다,,
-                if (isSkill(B, choiceB) == 0) return;
-                int[] actionList = {action.attack(), action.defense(), action.attack2(), action.attack3(), action.attackHard()}; //그때그때 랜덤값 생성을 위함
-                int damage = max(0, actionList[choiceB - 1] - actionList[1]); //damage는 음수일 수 없음
-                A.losehp(damage);
-            } else { //B가 방어인 경우
-                if (isSkill(A, choiceA) == 0) return;
-                int[] actionList = {action.attack(), action.defense(), action.attack2(), action.attack3(), action.attackHard()};
-                int damage = max(0, actionList[choiceA - 1] - actionList[1]);
-                B.losehp(damage);
             }
-        } else {//둘다 공격인 경우
-            if (isSkill(A, choiceA) == 0) return; //마나 없음
-            else {
-                int[] actionListA = {action.attack(), action.defense(), action.attack2(), action.attack3(), action.attackHard()};
-                int damageA = actionListA[choiceA - 1]; //A가 먼저 공격
-                B.losehp(damageA);
+            if(choice==5 && A.getSkill5Cool()>0){ //쿨타임이 존재하는 스킬일 경우(인덱스=4)
+                System.out.println("skill is cool");
+                return;
             }
-            if (B.getHp() <= 0) return; // B죽음 (A가 무조건 먼저 공격)
-            if (isSkill(B, choiceB) == 0) return; //마나 없음
-            int[] actionListB = {action.attack(), action.defense(), action.attack2(), action.attack3(), action.attackHard()};
-            int damageB = actionListB[choiceB - 1];
-            A.losehp(damageB);
+            int opponentShield = B.getShield();
+            if(choice==5){
+                A.setSkill5Cool(3); //턴 끝날때 --을 해주기에 결과적으로 2번의 쿨타임을 가짐
+            }
+            A.losemp(mana(choice));
+            int damage = actionList[choice-1];
+            B.losehp(max(0,damage- opponentShield)); //음수를 데미지 입힐 수 없음
         }
+
     }
-    
+
+
     public void runGame() {
         for (turn = 0; A.alive() && B.alive() && turn < end; turn++) {
+            System.out.println("turn:"+ turn);
             Scanner sc = new Scanner(System.in);
-            int choiceA = 2; //매개변수 2는 defense임으로 임시 초기화
-            int choiceB = 2;
-            if (A.getWait() == 0) {
-                print(A, B);
-                choiceA = sc.nextInt();
-            } else {
-                A.setWait(A.getWait() - 1);
+            //A먼저 진행
+            print(A,B);
+            int choiceA = sc.nextInt();
+            act(A,B,choiceA);
+
+            if(!B.alive()){ //A공격으로 B 사망
+                break;
             }
 
-            if (B.getWait() == 0) {
-                print(B, A);
-                choiceB = sc.nextInt();
-            } else {
-                B.setWait(B.getWait() - 1);
-            }
-
-            inTurn(choiceA, choiceB);
+            print(B,A);
+            int choiceB = sc.nextInt();
+            act(B,A,choiceB);
+            action.coolDown(A,B);
         }
 
         //for문 끝났을 경우 -> turn 횟수 소진 & 한 명 죽음
@@ -99,6 +81,22 @@ public class game implements Turn {
 
     }
 
+    //공격 마나
+    public int mana(int choice){
+        if(choice==1){
+            return 0;
+        }
+        else if(choice==3){
+            return 2;
+        }
+        else if(choice==4){
+            return 3;
+        }
+        else{ //choice==5
+            return 5;
+        }
+    }
+
     public void print(Character A, Character B) {
         System.out.println(A.getName() + " hp:" + A.getHp() + " mp:" + A.getMp() + " | " + B.getName() + " hp:" + B.getHp() + " mp:" + B.getMp());
         System.out.println("1. attack(1~10)");
@@ -108,23 +106,5 @@ public class game implements Turn {
         System.out.println("5. hard attack(5~50) - 5MP - 2turns");
     }
 
-    public int isSkill(Character A, int choice) {
-        int[] mpcost = {0, 0, 0, 2, 3, 5}; //인덱스 1~5
-        int tempmp = A.getMp(); //캐릭터mp
-
-        if (choice >= 3 && choice <= 5) { //마나 소모 스킬
-            int requiredMana = mpcost[choice];
-            if (tempmp < requiredMana) {
-                return 0; // 마나 부족
-            }
-            A.losemp(requiredMana);
-            if (choice == 5) {
-                A.setWait(2); // 특별 조건 처리
-            }
-            return choice;
-        }
-        // 1 or 2
-        return choice;
-    }
 }
 

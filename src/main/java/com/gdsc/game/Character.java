@@ -13,14 +13,28 @@ public class Character implements interfaceCharacter{
     private int hp;
     private int mp;
 
-    private int wait; //turn wait
+    private int shield;
 
-    public int getWait() {
-        return wait;
+    private int skill5Cool;
+
+    public int getSkill5Cool() {
+        return skill5Cool;
     }
 
-    public void setWait(int wait) {
-        this.wait = wait;
+    public void setSkill5Cool(int skillCool) {
+        this.skill5Cool = skillCool;
+    }
+
+
+
+
+
+    public int getShield() {
+        return shield;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
     }
 
     public Character(String name){
