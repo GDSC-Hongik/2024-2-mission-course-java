@@ -1,19 +1,20 @@
-package com.gdsc.game;
+package com.gdsc.game.model;
 
-import com.gdsc.game.model.Character;
-
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+// import java.util.Scanner;
 
 public class Game {
     private int turnCount;
     private int maxTurns;
-    private com.gdsc.game.model.Character player1;
-    private com.gdsc.game.model.Character player2;
-    private com.gdsc.game.model.Character currentPlayer;
-    private com.gdsc.game.model.Character opponent;
+    private Character player1;
+    private Character player2;
+    private Character currentPlayer;
+    private Character opponent;
+    private int actionCounter = 0; // 현재 턴에서 행동한 캐릭터 수
 
     // 생성자
-    public Game(com.gdsc.game.model.Character player1, com.gdsc.game.model.Character player2, int maxTurns) {
+    public Game(Character player1, Character player2, int maxTurns) {
         this.player1 = player1;
         this.player2 = player2;
         this.maxTurns = maxTurns;
@@ -22,18 +23,28 @@ public class Game {
         this.opponent = player2;
     }
 
+    // 게임 상태 조회
+    public Map<String, Object> getGameState(){
+        Map<String, Object> state = new HashMap<>();
+        state.put("turnCount", turnCount);
+        state.put("maxTurns", maxTurns);
+        state.put("player1", player1);
+        state.put("player2", player2);
+        state.put("currentPlayer", currentPlayer.getName());
+        state.put("opponent", opponent.getName());
+        state.put("isGameOver", isGameOver());
+        return state;
+    }
+
     // 턴 진행 로직
-    public void nextTurn() {
+    public Map<String, Object> nextTurn(int action, int skillIndex) {
+
+
         if(isGameOver()){
-            return;
+            return getGameState();
         }
 
-        printStatus();
-
         // 플레이어 행동 선택
-        Scanner scanner = new Scanner(System.in);
-        int action = scanner.nextInt();
-
         int damage = 0;
         switch(action){
             // 공격
@@ -63,8 +74,20 @@ public class Game {
                 break;
         }
         reduceCooldowns();
+
+        // 행동 카운터 증가
+        actionCounter++;
+
+        // 두 캐릭터가 모두 행동했으면 턴 종료
+        if (actionCounter == 2) {
+            turnCount++;
+            actionCounter = 0; // 행동 카운터 초기화
+            System.out.println("턴 종료: " + turnCount);
+        }
+
         swapPlayers();
-        turnCount++;
+
+        return getGameState();
     }
 
     // 쿨다운 적용
@@ -81,6 +104,12 @@ public class Game {
         opponent = temp;
     }
 
+    // 게임 종료 여부 확인
+    public boolean isGameOver(){
+        return player1.getHealth() <= 0 || player2.getHealth() <= 0 || turnCount >= maxTurns;
+    }
+
+    /*
     // 상태 출력
     private void printStatus() {
         System.out.println(currentPlayer.getName() + " 체력: " + currentPlayer.getHealth() + " 마나: " + currentPlayer.getMana()
@@ -94,10 +123,11 @@ public class Game {
             skillNumber++;
         }
     }
+     */
 
-
+    /*
     // 게임 종료 여부 확인
-    boolean isGameOver() {
+    public boolean isGameOver() {
         if(player1.getHealth() <= 0 || player2.getHealth() <= 0){
             System.out.println("게임 종료");
             if(player1.getHealth() > player2.getHealth()){
@@ -122,5 +152,5 @@ public class Game {
 
         return false;
     }
-
+     */
 }
