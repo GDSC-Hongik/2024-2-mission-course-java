@@ -1,17 +1,19 @@
 package com.gdsc.game;
 
+import com.gdsc.game.model.Character;
+
 import java.util.Scanner;
 
 public class Game {
     private int turnCount;
     private int maxTurns;
-    private Character player1;
-    private Character player2;
-    private Character currentPlayer;
-    private Character opponent;
+    private com.gdsc.game.model.Character player1;
+    private com.gdsc.game.model.Character player2;
+    private com.gdsc.game.model.Character currentPlayer;
+    private com.gdsc.game.model.Character opponent;
 
     // 생성자
-    public Game(Character player1, Character player2, int maxTurns) {
+    public Game(com.gdsc.game.model.Character player1, com.gdsc.game.model.Character player2, int maxTurns) {
         this.player1 = player1;
         this.player2 = player2;
         this.maxTurns = maxTurns;

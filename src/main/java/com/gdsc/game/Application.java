@@ -1,5 +1,7 @@
 package com.gdsc.game;
 
+import com.gdsc.game.model.Character;
+
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
@@ -15,8 +17,8 @@ public class Application {
         Skill ice_arrow = new Skill("얼음 화살", 3, 1);
 
         // 캐릭터 생성
-        Character knight = new Character("knight", 50, 30, new Skill[]{double_strike, triple_strike, power_strike});
-        Character slime = new Character("slime", 30, 20, new Skill[]{fire_arrow, ice_arrow});
+        com.gdsc.game.model.Character knight = new com.gdsc.game.model.Character("knight", 50, 30, new Skill[]{double_strike, triple_strike, power_strike});
+        com.gdsc.game.model.Character slime = new Character("slime", 30, 20, new Skill[]{fire_arrow, ice_arrow});
 
         // 게임 생성
         Game game = new Game(knight, slime, 5);
