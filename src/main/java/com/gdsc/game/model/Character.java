@@ -1,4 +1,4 @@
-package com.gdsc.game;
+package com.gdsc.game.model;
 
 import java.util.Random;
 
