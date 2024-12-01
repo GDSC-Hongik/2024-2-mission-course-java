@@ -16,9 +16,41 @@ repositories {
 }
 
 dependencies {
+    // Spring Boot Web Starter
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.0'
+
+    // Lombok (버전 추가)
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // Jackson Databind
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+
+    // Spring Boot Starter Validation (유효성 검사)
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.0'
+
+    // Spring Boot Starter Test (테스트)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
+
+    // JUnit 5 (테스트용)
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // JUnit Platform Launcher (JUnit 5 런처)
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.1'
+
+    // Spring Boot Starter (기본 starter)
+    implementation 'org.springframework.boot:spring-boot-starter:2.7.0'
+
+    // JSON 처리 라이브러리
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+
+    // 기타 필요한 의존성들 (예시)
+    implementation 'org.springframework.boot:spring-boot-starter-logging:2.7.0'  // 로그
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.7.0'  // Thymeleaf 템플릿 엔진 (필요시)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.0'  // Spring Boot Actuator (애플리케이션 관리 도구)
 }
+
+
 
 tasks.named('test') {
     useJUnitPlatform()

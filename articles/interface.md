@@ -21,3 +21,4 @@
 
 ### 여러분의 답변을 적어주세요!
 > TIP: mermaid 라는 드로잉 툴을 활용해보세요.
+![alt text](image.png)
