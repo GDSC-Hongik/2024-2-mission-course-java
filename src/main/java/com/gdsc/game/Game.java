@@ -31,6 +31,11 @@ public class Game  {
         return characters.get(name);
     }
 
+    public String getAvailableSKill(String name){
+        Character character = characters.get(name);
+        return name+"'s Available skill(cooltime) : attack2(0), attack3(0), attackHard("+Integer.toString(character.getSkill5Cool())+")";
+    }
+
     public void act(Character A,Character B, int choice){ //행위자는 A (A가 공격 or A shield 생성)
         A.setShield(0); //shield를 초기화 (이미 썼거나 처음인 경우)
         int[] actionList = {action.attack(), action.defense(), action.attack2(A), action.attack3(A), action.attackHard(A)}; //인덱스 0~4

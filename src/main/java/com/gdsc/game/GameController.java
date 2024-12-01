@@ -17,5 +17,16 @@ public class GameController {
         return gameService.getCharacterState(name);
     }
 
+    @GetMapping("/character/{name}/skill")
+    public String getAvailableSkill(@PathVariable String name){
+        return gameService.getAvailableSKill(name);
+    }
+
+
+//
+//    @PostMapping("/action")
+//    public String performAction(@RequestBody ActionRequest request) {
+//        return gameService.performAction(request.getAttacker(), request.getAction(), request.getSkillName());
+//    }
 
 }
