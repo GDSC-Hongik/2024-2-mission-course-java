@@ -33,7 +33,6 @@ public class Application{
 //
 //        int turn = 7;
 //
-//        Game runGame = new Game(A,B,turn);
         Game runGame = new Game();
         runGame.runGame();
 

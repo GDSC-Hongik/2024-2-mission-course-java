@@ -2,15 +2,15 @@ package com.gdsc.game;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Supplier;
 
 import static java.lang.Math.max;
 
 @Service
 public class Game  {
+
+    private Map<String, Character> characters = new HashMap<>(); //character list
     private int turn; //현재 turn
     private int end; // 총 turn 횟수
 
@@ -20,10 +20,15 @@ public class Game  {
     Action action = new Action();
 
 
+
     public Game() { //매개변수 turn은 총 횟수
-        this.A = new Character("knight");;
-        this.B = new Character("slime");
+        characters.put("knight",new Character("knight"));
+        characters.put("slime",new Character("slime"));
         this.end = 7;
+    }
+
+    public Character getCharacterState(String name){
+        return characters.get(name);
     }
 
     public void act(Character A,Character B, int choice){ //행위자는 A (A가 공격 or A shield 생성)
@@ -54,6 +59,9 @@ public class Game  {
 
 
     public void runGame() {
+        this.A = characters.get("knight");
+        this.B = characters.get("slime");
+
         for (turn = 0; A.alive() && B.alive() && turn < end; turn++) {
             System.out.println("turn:"+ turn);
 //            Scanner sc = new Scanner(System.in);
