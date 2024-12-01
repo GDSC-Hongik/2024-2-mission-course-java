@@ -22,18 +22,19 @@ public class Application{
 
         SpringApplication.run(Application.class, args);
 
-        String name1 = "knight";
-        String name2 = "slime";
-
-        Character A = new Character(name1);
-        Character B = new Character(name2);
-
-//        System.out.println("How many turns?");
-//        int turn = sc.nextInt();
-
-        int turn = 7;
-
-        Game runGame = new Game(A,B,turn);
+//        String name1 = "knight";
+//        String name2 = "slime";
+//
+//        Character A = new Character(name1);
+//        Character B = new Character(name2);
+//
+////        System.out.println("How many turns?");
+////        int turn = sc.nextInt();
+//
+//        int turn = 7;
+//
+//        Game runGame = new Game(A,B,turn);
+        Game runGame = new Game();
         runGame.runGame();
 
 //        sc.close();

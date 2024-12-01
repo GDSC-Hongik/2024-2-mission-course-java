@@ -1,5 +1,7 @@
 package com.gdsc.game;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,6 +9,7 @@ import java.util.function.Supplier;
 
 import static java.lang.Math.max;
 
+@Service
 public class Game  {
     private int turn; //현재 turn
     private int end; // 총 turn 횟수
@@ -17,10 +20,10 @@ public class Game  {
     Action action = new Action();
 
 
-    public Game(Character A, Character B, int turn) { //매개변수 turn은 총 횟수
-        this.A = A;
-        this.B = B;
-        this.end = turn;
+    public Game() { //매개변수 turn은 총 횟수
+        this.A = new Character("knight");;
+        this.B = new Character("slime");
+        this.end = 7;
     }
 
     public void act(Character A,Character B, int choice){ //행위자는 A (A가 공격 or A shield 생성)
