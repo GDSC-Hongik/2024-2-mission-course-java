@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 import static java.lang.Math.max;
 
-public class game  {
+public class Game  {
     private int turn; //현재 turn
     private int end; // 총 turn 횟수
 
@@ -17,7 +17,7 @@ public class game  {
     Action action = new Action();
 
 
-    public game(Character A, Character B, int turn) { //매개변수 turn은 총 횟수
+    public Game(Character A, Character B, int turn) { //매개변수 turn은 총 횟수
         this.A = A;
         this.B = B;
         this.end = turn;

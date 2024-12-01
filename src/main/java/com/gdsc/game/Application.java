@@ -21,7 +21,7 @@ public class Application{
         System.out.println("How many turns?");
         int turn = sc.nextInt();
 
-        game runGame = new game(A,B,turn);
+        Game runGame = new Game(A,B,turn);
         runGame.runGame();
 
         sc.close();
