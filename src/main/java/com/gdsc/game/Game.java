@@ -53,19 +53,19 @@ public class Game  {
     public void runGame() {
         for (turn = 0; A.alive() && B.alive() && turn < end; turn++) {
             System.out.println("turn:"+ turn);
-            Scanner sc = new Scanner(System.in);
+//            Scanner sc = new Scanner(System.in);
             //A먼저 진행
             print(A,B);
-            int choiceA = sc.nextInt();
-            act(A,B,choiceA);
+//            int choiceA = sc.nextInt();
+//            act(A,B,choiceA);
 
             if(!B.alive()){ //A공격으로 B 사망
                 break;
             }
 
             print(B,A);
-            int choiceB = sc.nextInt();
-            act(B,A,choiceB);
+//            int choiceB = sc.nextInt();
+//            act(B,A,choiceB);
             action.coolDown(A,B);
         }
 
