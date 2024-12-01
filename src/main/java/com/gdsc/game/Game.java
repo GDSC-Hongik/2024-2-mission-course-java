@@ -36,20 +36,36 @@ public class Game  {
         return name+"'s Available skill(cooltime) : attack2(0), attack3(0), attackHard("+Integer.toString(character.getSkill5Cool())+")";
     }
 
-    public void act(Character A,Character B, int choice){ //행위자는 A (A가 공격 or A shield 생성)
+    public String performAction(String name, int number){
+        int amount;
+        if(name.equals("knight")){
+            Character A = characters.get("knight");
+            Character B = characters.get("slime");
+            amount = act(A,B,number);
+        }
+        else{ //slime
+            Character A = characters.get("slime");
+            Character B = characters.get("knight");
+            amount = act(A,B,number);
+        }
+        return name+"'s damage or shield:"+amount;
+    }
+
+    public int act(Character A,Character B, int choice){ //행위자는 A (A가 공격 or A shield 생성)
         A.setShield(0); //shield를 초기화 (이미 썼거나 처음인 경우)
         int[] actionList = {action.attack(), action.defense(), action.attack2(A), action.attack3(A), action.attackHard(A)}; //인덱스 0~4
         if (choice ==2){
             int shield = actionList[choice-1];
             A.setShield(shield);
+            return shield;
         } else { //choice == 1 or 3 or 4 or 5
             if(A.getMp()<mana(choice) ){ //마나없는 경우
                 System.out.println("no have mp!");
-                return;
+                return 0;
             }
             if(choice==5 && A.getSkill5Cool()>0){ //쿨타임이 존재하는 스킬일 경우(인덱스=4)
                 System.out.println("skill is cool");
-                return;
+                return 0;
             }
             int opponentShield = B.getShield();
             if(choice==5){
@@ -58,6 +74,7 @@ public class Game  {
             A.losemp(mana(choice));
             int damage = actionList[choice-1];
             B.losehp(max(0,damage- opponentShield)); //음수를 데미지 입힐 수 없음
+            return damage;
         }
 
     }

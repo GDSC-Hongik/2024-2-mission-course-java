@@ -23,6 +23,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter' // 기본 스프링 부트 의존성
     implementation 'org.springframework.boot:spring-boot-starter-web' // REST API 개발용
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트용
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
 }
 
 tasks.named('test') {

@@ -23,10 +23,25 @@ public class GameController {
     }
 
 
-//
-//    @PostMapping("/action")
-//    public String performAction(@RequestBody ActionRequest request) {
-//        return gameService.performAction(request.getAttacker(), request.getAction(), request.getSkillName());
-//    }
+
+    @PostMapping("/action")
+    public String performAction(@RequestBody ActionRequest request) {
+        System.out.println(request.getName());
+        System.out.println(request.getNumber());
+        return gameService.performAction(request.getName(), request.getNumber());
+    }
+    public static class ActionRequest {
+        private String name;
+        private int number;
+
+        public String getName() {
+            return name;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+    }
 
 }
